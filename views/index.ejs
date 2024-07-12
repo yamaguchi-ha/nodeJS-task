@@ -17,6 +17,7 @@
     <p id="textTag"></p>
     <p id="textTag2"></p>
     <ul id="petList"></ul>
+    <div id="memberList"></div>
 
     <!--こちらに基礎課題で言われてる内容を記述しましょう。ここまで-->
     <script type="text/javascript">
@@ -41,6 +42,8 @@
 
       // 基礎課題02:HTML内にulタグを作成し、liタグでapp.jsで作成した情報を画面に表示して下さい。
       let pet = JSON.parse("<%= JSON.stringify(pet) %>".replace(/&#34;/g, '"'));
+      // ↑は、文字化けを防いで配列を表示させるための記述
+
       let petList = document.getElementById("petList");
 
       pet.forEach((pets) => {
@@ -53,6 +56,21 @@
       // 例）
       // name: s.chiba
       // email: s.chiba@gmail.com
+      let members = JSON.parse(
+        "<%= JSON.stringify(members) %>".replace(/&#34;/g, '"')
+      );
+
+      let memberList = document.getElementById("memberList");
+
+      members.forEach((member) => {
+        memberList.insertAdjacentHTML(
+          "afterbegin",
+          `<ul>
+            <li>name: ${member.name}</li>
+            <li>email: ${member.email}</li>
+          </ul>`
+        );
+      });
     </script>
   </body>
 </html>
