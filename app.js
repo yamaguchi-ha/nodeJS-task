@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   const num = 10000;
   const food = "にんじん";
   const pet = ["犬", "猫", "うさぎ", "鳥", "カメ"];
-  const member = [
+  const members = [
     {
       name: "s.chiba",
       email: "s.chiba@gmail.com",
@@ -80,7 +80,7 @@ app.get("/", (req, res) => {
       number: num,
       food: food,
       pet: pet,
-      member: member,
+      members: members,
     });
   });
 });
