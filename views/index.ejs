@@ -57,14 +57,14 @@
       // name: s.chiba
       // email: s.chiba@gmail.com
       let members = JSON.parse(
-        "<%= JSON.stringify(members) %>".replace(/&#34;/g, '"')
+        "<%= JSON.stringify(users) %>".replace(/&#34;/g, '"')
       );
 
       let memberList = document.getElementById("memberList");
 
       members.forEach((member) => {
         memberList.insertAdjacentHTML(
-          "afterbegin",
+          "beforeend",
           `<ul>
             <li>name: ${member.name}</li>
             <li>email: ${member.email}</li>
