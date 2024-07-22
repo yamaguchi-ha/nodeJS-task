@@ -19,7 +19,6 @@ const con = mysql.createConnection({
 app.get("/", (req, res) => {
   const sql = "select * from users";
   // 参考例
-  const num = 10000;
 
   // ==========ここまでの範囲で書くようにしましょう。==========
   con.query(sql, function (err, result, fields) {
