@@ -5,18 +5,46 @@
     <title>User list</title>
   </head>
   <body>
-    <table>
+    <!--こちらに実務課題で言われてる内容を記述しましょう。ここから-->
+
+    <!-- ①ユーザーのIDを入力すると、そのIDに関連する名前とメールアドレスを取得し、ブラウザに表示する機能を実装する。 -->
+    <label>IDを入力してください</label><br />
+    <input type="text" id="inputId" style="margin-bottom: 30px; padding: 5px" />
+
+    <table border="1" style="border-collapse: collapse">
       <tr>
-        <th>名前</th>
-        <th>email</th>
-        <th>更新</th>
-        <th>削除</th>
+        <th style="padding: 5px">名前</th>
+        <th style="padding: 5px">email</th>
+      </tr>
+      <tr style="border: solid 1px">
+        <td id="userName" style="padding: 5px; border: solid 1px"></td>
+        <td id="userEmail" style="padding: 5px; border: solid 1px"></td>
       </tr>
     </table>
-    <!--こちらに基礎課題で言われてる内容を記述しましょう。ここから-->
-    <p id="textTag"></p>
 
-    <!--こちらに基礎課題で言われてる内容を記述しましょう。ここまで-->
-    <script type="text/javascript"></script>
+    <!--こちらに実務課題で言われてる内容を記述しましょう。ここまで-->
+    <script type="text/javascript">
+      inputId.addEventListener("input", (e) => {
+        let users = JSON.parse(
+          "<%= JSON.stringify(users) %>".replace(/&#34;/g, '"')
+        );
+
+        let inputId = document.getElementById("inputId");
+        let userName = document.getElementById("userName");
+        let userEmail = document.getElementById("userEmail");
+
+        for (let i = 0; i < users.length; i++) {
+          let inputIdValue = e.target.value;
+          let usersId = users[i].id;
+
+          if (Number(usersId) === Number(inputIdValue)) {
+            userName.innerHTML = users[i].name;
+            userEmail.innerHTML = users[i].email;
+          }
+        }
+      });
+
+      // 実務課題02:ユーザー情報システムの一覧を表示し、各ユーザーに対して更新・削除ボタンを実装する。
+    </script>
   </body>
 </html>
