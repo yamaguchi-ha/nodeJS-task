@@ -2,16 +2,17 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
     <title>User list</title>
   </head>
   <body>
     <!--こちらに実務課題で言われてる内容を記述しましょう。ここから-->
 
-    <!-- ①ユーザーのIDを入力すると、そのIDに関連する名前とメールアドレスを取得し、ブラウザに表示する機能を実装する。 -->
+    <!-- 実務課題01:ユーザーのIDを入力すると、そのIDに関連する名前とメールアドレスを取得し、ブラウザに表示する機能を実装する。 -->
     <label>IDを入力してください</label><br />
     <input type="text" id="inputId" style="margin-bottom: 30px; padding: 5px" />
 
-    <table border="1" style="border-collapse: collapse">
+    <table border="1" style="border-collapse: collapse; margin-bottom: 30px">
       <tr>
         <th style="padding: 5px">名前</th>
         <th style="padding: 5px">email</th>
@@ -20,6 +21,23 @@
         <td id="userName" style="padding: 5px; border: solid 1px"></td>
         <td id="userEmail" style="padding: 5px; border: solid 1px"></td>
       </tr>
+    </table>
+
+    <!-- 実務課題02:ユーザー情報システムの一覧を表示し、各ユーザーに対して更新・削除ボタンを実装する。 -->
+    <table
+      border="1"
+      id="data-table"
+      style="border-collapse: collapse; margin-bottom: 30px"
+    >
+      <thead>
+        <tr>
+          <th style="padding: 5px">id</th>
+          <th style="padding: 5px">名前</th>
+          <th style="padding: 5px">email</th>
+          <th style="padding: 5px">ボタン</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
 
     <!--こちらに実務課題で言われてる内容を記述しましょう。ここまで-->
@@ -45,6 +63,54 @@
       });
 
       // 実務課題02:ユーザー情報システムの一覧を表示し、各ユーザーに対して更新・削除ボタンを実装する。
+
+      // ユーザー情報システムの一覧を表示させる
+      let userListInner = document.getElementById("userListInner");
+
+      let users = JSON.parse(
+        "<%= JSON.stringify(users) %>".replace(/&#34;/g, '"')
+      );
+
+      let tableBody = document.querySelector("#data-table tbody");
+
+      users.forEach((item) => {
+        let row = document.createElement("tr");
+        tableBody.appendChild(row);
+
+        Object.values(item).forEach((value) => {
+          let cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+
+        // 各ユーザーに対して更新・削除ボタンを実装する
+        // 最後の列にボタンを追加
+        let actionCell = document.createElement("td");
+        let button1 = document.createElement("a");
+        let button2 = document.createElement("a");
+        button1.textContent = "更新";
+        button2.textContent = "削除";
+        let userId = item.id;
+        console.log(userId);
+
+        // 更新ボタンクリック時
+        button1.onclick = () => {
+          button1.href = `/edit/${userId}`;
+        };
+
+        // 削除ボタンクリック時
+        button2.onclick = () => {
+          // row.style.display = "none";
+          button2.href = `/delete/${userId}`;
+        };
+
+        actionCell.appendChild(button1);
+        actionCell.appendChild(button2);
+        row.appendChild(actionCell);
+
+        // 行をテーブルボディに追加
+        tableBody.appendChild(row);
+      });
     </script>
   </body>
 </html>

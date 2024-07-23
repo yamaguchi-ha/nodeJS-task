@@ -2,9 +2,11 @@ const path = require("path");
 const express = require("express");
 const ejs = require("ejs");
 const app = express();
+const bodyParser = require("body-parser");
 const port = 3000;
 
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const mysql = require("mysql2");
 
@@ -14,6 +16,8 @@ const con = mysql.createConnection({
   password: "rootroot",
   database: "express_db",
 });
+
+app.use(express.static("assets"));
 
 // mysqlからデータを持ってくる
 app.get("/", (req, res) => {
