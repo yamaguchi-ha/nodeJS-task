@@ -30,3 +30,12 @@ input {
   margin-bottom: 15px;
   padding: 10px;
 }
+.inactive {
+  background-color: #808080 !important;
+  border: 1px solid #808080 !important;
+  cursor: unset !important;
+  border-radius: 4px;
+}
+.inactive:hover {
+  opacity: unset !important;
+}

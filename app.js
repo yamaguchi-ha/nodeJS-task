@@ -40,16 +40,6 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/edit/:id", (req, res) => {
-  const sql = "SELECT * FROM users WHERE id = ?";
-  con.query(sql, [req.params.id], function (err, result, fields) {
-    if (err) throw err;
-    res.render("edit", {
-      user: result,
-    });
-  });
-});
-
 app.post("/", (req, res) => {
   const sql = "INSERT INTO users SET ?";
   con.query(sql, req.body, function (err, result, fields) {
@@ -61,6 +51,16 @@ app.post("/", (req, res) => {
 
 app.get("/create", (req, res) => {
   res.sendFile(path.join(__dirname, "html/form.html"));
+});
+
+app.get("/edit/:id", (req, res) => {
+  const sql = "SELECT * FROM users WHERE id = ?";
+  con.query(sql, [req.params.id], function (err, result, fields) {
+    if (err) throw err;
+    res.render("edit", {
+      user: result,
+    });
+  });
 });
 
 app.post("/update/:id", (req, res) => {
