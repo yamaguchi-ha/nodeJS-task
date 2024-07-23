@@ -23,16 +23,22 @@
     </table>
 
     <!-- 実務課題02:ユーザー情報システムの一覧を表示し、各ユーザーに対して更新・削除ボタンを実装する。 -->
-    <table border="1" style="border-collapse: collapse; margin-bottom: 30px">
-      <tr>
-        <th style="padding: 5px">id</th>
-        <th style="padding: 5px">名前</th>
-        <th style="padding: 5px">email</th>
-      </tr>
-      <tr style="border: solid 1px" id="userListInner"></tr>
+    <table
+      border="1"
+      id="data-table"
+      style="border-collapse: collapse; margin-bottom: 30px"
+    >
+      <thead>
+        <tr>
+          <th style="padding: 5px">id</th>
+          <th style="padding: 5px">名前</th>
+          <th style="padding: 5px">email</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
     </table>
-    <button id="update">更新</button>
-    <button id="delete">削除</button>
+    <button id="updateButton">更新</button>
+    <button id="deleteButton">削除</button>
 
     <!--こちらに実務課題で言われてる内容を記述しましょう。ここまで-->
     <script type="text/javascript">
@@ -57,6 +63,30 @@
       });
 
       // 実務課題02:ユーザー情報システムの一覧を表示し、各ユーザーに対して更新・削除ボタンを実装する。
+
+      // ユーザー情報システムの一覧を表示させる
+      let userListInner = document.getElementById("userListInner");
+      let updateButton = document.getElementById("updateButton");
+      let deleteButton = document.getElementById("deleteButton");
+
+      let users = JSON.parse(
+        "<%= JSON.stringify(users) %>".replace(/&#34;/g, '"')
+      );
+
+      let tableBody = document.querySelector("#data-table tbody");
+
+      users.forEach((item) => {
+        let row = document.createElement("tr");
+        tableBody.appendChild(row);
+
+        Object.values(item).forEach((value) => {
+          let cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+
+        // 各ユーザーに対して更新・削除ボタンを実装する
+      });
     </script>
   </body>
 </html>
