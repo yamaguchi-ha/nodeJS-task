@@ -50,6 +50,19 @@ app.get("/edit/:id", (req, res) => {
   });
 });
 
+app.post("/", (req, res) => {
+  const sql = "INSERT INTO users SET ?";
+  con.query(sql, req.body, function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+    res.redirect("/");
+  });
+});
+
+app.get("/create", (req, res) => {
+  res.sendFile(path.join(__dirname, "html/form.html"));
+});
+
 app.post("/update/:id", (req, res) => {
   const sql = "UPDATE users SET ? WHERE id = " + req.params.id;
   con.query(sql, req.body, function (err, result, fields) {

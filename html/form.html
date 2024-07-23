@@ -2,16 +2,21 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
     <title>入力フォーム</title>
   </head>
   <body>
     <h2>入力フォーム</h2>
     <form action="/" method="POST">
       <!-- ここに入力要素を追加する -->
-      <p><input type="text" placeholder="名前を入力してください" /></p>
-      <p>
-        <input type="email" placeholder="メールアドレスを入力してください" />
-      </p>
+      <label>name</label>
+      <br />
+      <input type="text" placeholder="名前を入力してください" />
+      <br />
+      <label>mail</label>
+      <br />
+      <input type="email" placeholder="メールアドレスを入力してください" />
+      <br />
       <button type="submit">送信</button>
     </form>
   </body>
