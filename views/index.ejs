@@ -2,6 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
     <title>User list</title>
   </head>
   <body>
@@ -33,12 +34,11 @@
           <th style="padding: 5px">id</th>
           <th style="padding: 5px">名前</th>
           <th style="padding: 5px">email</th>
+          <th style="padding: 5px">ボタン</th>
         </tr>
       </thead>
       <tbody></tbody>
     </table>
-    <button id="updateButton">更新</button>
-    <button id="deleteButton">削除</button>
 
     <!--こちらに実務課題で言われてる内容を記述しましょう。ここまで-->
     <script type="text/javascript">
@@ -66,8 +66,6 @@
 
       // ユーザー情報システムの一覧を表示させる
       let userListInner = document.getElementById("userListInner");
-      let updateButton = document.getElementById("updateButton");
-      let deleteButton = document.getElementById("deleteButton");
 
       let users = JSON.parse(
         "<%= JSON.stringify(users) %>".replace(/&#34;/g, '"')
@@ -86,6 +84,32 @@
         });
 
         // 各ユーザーに対して更新・削除ボタンを実装する
+        // 最後の列にボタンを追加
+        let actionCell = document.createElement("td");
+        let button1 = document.createElement("a");
+        let button2 = document.createElement("a");
+        button1.textContent = "更新";
+        button2.textContent = "削除";
+        let userId = item.id;
+        console.log(userId);
+
+        // 更新ボタンクリック時
+        button1.onclick = () => {
+          button1.href = `/edit/${userId}`;
+        };
+
+        // 削除ボタンクリック時
+        button2.onclick = () => {
+          // row.style.display = "none";
+          button2.href = `/delete/${userId}`;
+        };
+
+        actionCell.appendChild(button1);
+        actionCell.appendChild(button2);
+        row.appendChild(actionCell);
+
+        // 行をテーブルボディに追加
+        tableBody.appendChild(row);
       });
     </script>
   </body>
