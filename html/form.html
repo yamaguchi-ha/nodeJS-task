@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <title>入力フォーム</title>
+  </head>
+  <body>
+    <h2>入力フォーム</h2>
+    <form action="/" method="POST">
+      <!-- ここに入力要素を追加する -->
+      <label>name</label>
+      <br />
+      <input
+        type="text"
+        name="name"
+        id="inputName"
+        placeholder="名前を入力してください"
+      />
+      <br />
+      <label>mail</label>
+      <br />
+      <input
+        type="text"
+        name="email"
+        id="inputEmail"
+        placeholder="メールアドレスを入力してください"
+      />
+      <br />
+      <button id="sendButton" type="submit">送信</button>
+    </form>
+
+    <script>
+      // 実務課題03:ユーザー情報システムの一覧へ新規情報を追加する画面を作成
+      let sendButton = document.getElementById("sendButton");
+      let inputName = document.getElementById("inputName");
+      let inputEmail = document.getElementById("inputEmail");
+
+      // どちらも入力されていたらボタンを活性化
+      function activation() {
+        let inputNameVal = inputName.value.trim();
+        let inputEmailVal = inputEmail.value.trim();
+        if (inputNameVal !== "" && inputEmailVal !== "") {
+          sendButton.disabled = false;
+          sendButton.classList.remove("inactive");
+        } else {
+          sendButton.disabled = true;
+          sendButton.classList.add("inactive");
+        }
+      }
+
+      //   名前入力欄チェック
+      inputName.addEventListener("input", (e) => {
+        let inputNameValue = e.target.value;
+        let nameRegex = /^[a-zA-Z.]*$/;
+
+        if (!nameRegex.test(inputNameValue)) {
+          alert("半角英語、「.」のみ入力可能です。");
+          e.target.value = inputNameValue.replace(/[^a-zA-Z.]/g, "");
+        }
+        activation();
+      });
+
+      //   メールアドレス入力欄チェック
+      inputEmail.addEventListener("input", (e) => {
+        let inputEmailValue = e.target.value;
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        if (!emailRegex.test(inputEmailValue)) {
+          alert("有効なメールアドレスを入力してください。");
+        }
+        activation();
+      });
+
+      // 初期状態をチェック
+      activation();
+    </script>
+  </body>
+</html>
